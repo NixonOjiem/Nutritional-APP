@@ -59,48 +59,56 @@ function ApiComp() { // Define the ApiComp component
   <div className='Group-container'>
     {/* Group 1: Nutritional Analysis */}
     <div className='Groups'>
-      <h2>Nutritional Analysis:</h2>
+      <h2>Calorie Count, Health Labels, & Diet Labels:</h2>
       {responseData.calories ? (
-        <p>Calories: {responseData.calories}</p>
+        <p>Calories: {responseData.calories} <br /><br /></p>
       ) : (
-        <p>No calories data available</p>
+        <p>No calories data available <br /> <br /></p>
       )}
-    </div>
-
-    {/* Group 2: Diet Labels */}
-    <div className='Goups'>
-      <h2>Diet Labels:</h2>
       {responseData.dietLabels && (
-        <p>{responseData.dietLabels.join(', ')}</p>
+        <p>{responseData.dietLabels.join(', ')} <br /> <br /></p>
       )}
-    </div>
-
-    {/* Group 3: Health Labels */}
-    <div className='Groups'>
-      <h2>Health Labels:</h2>
       {responseData.healthLabels && (
-        <p>{responseData.healthLabels.slice(0, 4).join(', ')}</p>
+        <p>{responseData.healthLabels.slice(0, 4).join(', ')}<br /> <br /></p>
       )}
-    </div>
+      {responseData.yield && (
+        <p>Yield: {responseData.yield}  <br /> <br /></p>
 
-    {/* Group 4: Ingredients */}
-    <div className='Groups'>
-      <h2>Ingredients:</h2>
-      {responseData.ingredients && (
-        <p>{responseData.ingredients.map(ingredient => ingredient.text).join(', ')}</p>
       )}
+      {responseData.totalWeight && (
+        <p>Total Weight: {responseData.totalWeight} <br /> <br /></p>
+      )}
+     
     </div>
 
     {/* Group 5: Total Daily */}
-    <div className='Groups'>
+    {/* <div className='Groups'>
       <h2>Total Daily:</h2>
       {Object.keys(responseData.totalDaily).map(key => (
         <p key={key}>{responseData.totalDaily[key].label}: {responseData.totalDaily[key].quantity}{responseData.totalDaily[key].unit}</p>
       ))}
-    </div>
+    </div> */}
+
+<div className="Groups">
+  <h2>Essential Ellements</h2>
+  {Object.keys(responseData.totalDaily)
+    .slice(0, Math.ceil(Object.keys(responseData.totalDaily).length / 2))
+    .map(key => (
+      <p key={key}>{responseData.totalDaily[key].label}: {responseData.totalDaily[key].quantity}{responseData.totalDaily[key].unit}</p>
+    ))}
+</div>
+
+<div className="Groups">
+<h2>Essential Ellements</h2>
+  {Object.keys(responseData.totalDaily)
+    .slice(Math.ceil(Object.keys(responseData.totalDaily).length / 2))
+    .map(key => (
+      <p key={key}>{responseData.totalDaily[key].label}: {responseData.totalDaily[key].quantity}{responseData.totalDaily[key].unit}</p>
+    ))}
+</div>
 
     {/* Group 6: Total Nutrients */}
-    <div className='Groups'>
+    {/* <div className='Groups'>
       <h2>Total Nutrients:</h2>
       {responseData.totalNutrients && (
         <div>
@@ -109,10 +117,34 @@ function ApiComp() { // Define the ApiComp component
           ))}
         </div>
       )}
+    </div> */}
+    <div className='Groups'>
+  <h3>Nutrients:</h3>
+  {responseData.totalNutrients && (
+    <div>
+      {Object.keys(responseData.totalNutrients)
+        .slice(0, Math.ceil(Object.keys(responseData.totalNutrients).length / 2))
+        .map(key => (
+          <p key={key}>{key}: {responseData.totalNutrients[key].quantity}{responseData.totalNutrients[key].unit}</p>
+        ))}
     </div>
+  )}
+</div>
+<div className='Groups'>
+<h3>Nutrients:</h3>
+  {responseData.totalNutrients && (
+    <div>
+      {Object.keys(responseData.totalNutrients)
+        .slice(Math.ceil(Object.keys(responseData.totalNutrients).length / 2))
+        .map(key => (
+          <p key={key}>{key}: {responseData.totalNutrients[key].quantity}{responseData.totalNutrients[key].unit}</p>
+        ))}
+    </div>
+  )}
+</div>
 
     {/* Group 7: Additional Info */}
-    <div className='Groups'>
+    {/* <div className='Groups'>
       <h2>Additional Info:</h2>
       {responseData.totalWeight && (
         <p>Total Weight: {responseData.totalWeight}</p>
@@ -123,7 +155,7 @@ function ApiComp() { // Define the ApiComp component
       {responseData.yield && (
         <p>Yield: {responseData.yield}</p>
       )}
-    </div>
+    </div> */}
   </div>
 )}
       </div>
