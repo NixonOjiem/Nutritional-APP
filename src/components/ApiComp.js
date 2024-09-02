@@ -55,17 +55,77 @@ function ApiComp() { // Define the ApiComp component
         onClick={handleSubmit} // Call the handleSubmit function when the button is clicked
       >Submit</button>
       <div>
-        {responseData && ( // Check if response data is available
-          <div>
-            <h2>Nutritional Analysis:</h2> 
-            {/* Check the actual structure of responseData and access calories correctly */}
-            {responseData.calories ? ( // Check if calories data is available
-              <p>Calories: {responseData.calories}</p> // Display the calories data
-            ) : (
-              <p>No calories data available</p> // Display a message if no calories data is available
-            )}
-          </div>
-        )}
+      {responseData && (
+  <div className='Group-container'>
+    {/* Group 1: Nutritional Analysis */}
+    <div className='Groups'>
+      <h2>Nutritional Analysis:</h2>
+      {responseData.calories ? (
+        <p>Calories: {responseData.calories}</p>
+      ) : (
+        <p>No calories data available</p>
+      )}
+    </div>
+
+    {/* Group 2: Diet Labels */}
+    <div className='Goups'>
+      <h2>Diet Labels:</h2>
+      {responseData.dietLabels && (
+        <p>{responseData.dietLabels.join(', ')}</p>
+      )}
+    </div>
+
+    {/* Group 3: Health Labels */}
+    <div className='Groups'>
+      <h2>Health Labels:</h2>
+      {responseData.healthLabels && (
+        <p>{responseData.healthLabels.slice(0, 4).join(', ')}</p>
+      )}
+    </div>
+
+    {/* Group 4: Ingredients */}
+    <div className='Groups'>
+      <h2>Ingredients:</h2>
+      {responseData.ingredients && (
+        <p>{responseData.ingredients.map(ingredient => ingredient.text).join(', ')}</p>
+      )}
+    </div>
+
+    {/* Group 5: Total Daily */}
+    <div className='Groups'>
+      <h2>Total Daily:</h2>
+      {Object.keys(responseData.totalDaily).map(key => (
+        <p key={key}>{responseData.totalDaily[key].label}: {responseData.totalDaily[key].quantity}{responseData.totalDaily[key].unit}</p>
+      ))}
+    </div>
+
+    {/* Group 6: Total Nutrients */}
+    <div className='Groups'>
+      <h2>Total Nutrients:</h2>
+      {responseData.totalNutrients && (
+        <div>
+          {Object.keys(responseData.totalNutrients).map(key => (
+            <p key={key}>{key}: {responseData.totalNutrients[key].quantity}{responseData.totalNutrients[key].unit}</p>
+          ))}
+        </div>
+      )}
+    </div>
+
+    {/* Group 7: Additional Info */}
+    <div className='Groups'>
+      <h2>Additional Info:</h2>
+      {responseData.totalWeight && (
+        <p>Total Weight: {responseData.totalWeight}</p>
+      )}
+      {responseData.uri && (
+        <p>URI: {responseData.uri}</p>
+      )}
+      {responseData.yield && (
+        <p>Yield: {responseData.yield}</p>
+      )}
+    </div>
+  </div>
+)}
       </div>
     </div>
   );
