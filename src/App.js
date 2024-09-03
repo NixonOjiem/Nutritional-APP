@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <Content />
-      <ApiComp />
+      <ApiComp /> 
     </div>
   );
 }
