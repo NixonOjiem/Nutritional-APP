@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
+import ExcelJS from 'exceljs';
 
 function ApiComp() {
   const textareaRef = useRef(null);
@@ -49,6 +50,64 @@ function ApiComp() {
     }
   }, [responseData]);
 
+
+  const handleDownloadExcel = () => {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Nutrition Data');
+  
+    // Add header row
+    worksheet.addRow([
+      'Category',
+      'Label',
+      'Quantity',
+      'Unit'
+    ]);
+  
+    // Add data rows
+    Object.keys(responseData.totalDaily).forEach((key) => {
+      worksheet.addRow([
+        'Total Daily',
+        key,
+        responseData.totalDaily[key].quantity,
+        responseData.totalDaily[key].unit
+      ]);
+    });
+  
+    Object.keys(responseData.totalNutrients).forEach((key) => {
+      worksheet.addRow([
+        'Total Nutrients',
+        key,
+        responseData.totalNutrients[key].quantity,
+        responseData.totalNutrients[key].unit
+      ]);
+    });
+  
+    // Add footer row
+    worksheet.addRow([
+      'Total Weight:',
+      responseData.totalWeight,
+      'g'
+    ]);
+  
+    // Create a blob and trigger a download
+    workbook.xlsx.writeBuffer()
+      .then((buffer) => {
+        const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'nutrition_data.xlsx';
+        a.click();
+        URL.revokeObjectURL(url);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+
+
+
   return (
     <div>
       <p className="Indication-For-textarea">Key in Your ingridients to get a detailed nutritional analysis of your meal</p>
@@ -65,6 +124,9 @@ function ApiComp() {
       <button className="Submit-button" onClick={handleSubmit}>
         Submit
       </button>
+      {responseData && (
+        <button className="Submit-button" onClick={handleDownloadExcel}>Download Excel</button>
+      )}
       {responseData ? (
   <div ref={containerRef}>
     <div className="Group-container">
