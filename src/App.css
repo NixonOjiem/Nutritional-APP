@@ -1,15 +1,14 @@
-*{
+* {
   margin: 0px;
   border: 0px;
   padding: 0px;
   overflow-x: hidden;
-
 }
-.App{
+.App {
   text-align: center;
   margin-top: 0px;
 }
-.Header{
+.Header {
   margin: 0px;
   padding: 0px;
   width: 50vw;
@@ -18,34 +17,36 @@
   margin-bottom: 5vh;
 }
 
-.Nav-bar{
+.Nav-bar {
   background-color: #004181;
   color: #fff;
   margin-bottom: 20px;
   padding: 10px;
 }
 
-.Header h2{
+.Header h2 {
   text-align: center;
   margin: 20px;
 }
-.Heading{
-  
-}
-.Indication-For-textarea{
+
+.Indication-For-textarea {
   margin: 20px;
-  
 }
-.Ingridients-Capture{
-  border: 1px solid #004181;
+.Ingridients-Capture {
+  border: 2px solid #004181;
   border-radius: 5px;
 }
-.Submit-button{
+.Submit-button {
   padding: 12px;
   margin: 10px;
   background-color: #004181;
   color: #fff;
-}.Group-container {
+}
+.Submit-button:hover {
+  background-color: rgb(104, 139, 168) !important;
+  color: #f8f8f8 !important;
+}
+.Group-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -65,4 +66,12 @@
 /* Make all cards have the same height as the largest card */
 .Group-container {
   align-items: stretch;
+}
+@media only screen and (max-width: 768px){
+  .Header {
+    width: 90vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    text-align: justify;
+  }
 }
