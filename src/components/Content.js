@@ -1,6 +1,7 @@
 import React from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import healthypic from "../images/healthymeal.jpg";
 
 function Content() {
   AOS.init();
@@ -26,7 +27,7 @@ function Content() {
           a balanced diet.
         </p>
         <br />
-
+        <img src={healthypic} className="img" />
         <p>
           This app is designed to simplify this process. It calculates the
           nutritional breakdown of your meals, providing detailed insights into

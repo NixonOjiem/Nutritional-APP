@@ -103,7 +103,7 @@ function ApiComp() {
   };
 
   return (
-    <div>
+    <div className="Results">
       <p
         className="Indication-For-textarea"
         data-aos="fade-zoom-in"
@@ -111,8 +111,8 @@ function ApiComp() {
         data-aos-delay="100"
         data-aos-offset="0"
       >
-        Key in Your ingridients to get a detailed nutritional analysis of your
-        meal
+        Key in Your ingridients/meal details to get a detailed nutritional
+        analysis of your meal
       </p>
       <textarea
         className="Ingridients-Capture"
@@ -148,7 +148,7 @@ function ApiComp() {
         </button>
       )}
       {responseData ? (
-        <div ref={containerRef} data-aos="fade-up">
+        <div ref={containerRef} data-aos="fade-up" className="Results">
           <div className="Group-container">
             {/* Group 1: Nutritional Analysis */}
             <div className="Groups">
